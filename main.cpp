@@ -1,11 +1,12 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <utility>
 using namespace std;
 
 size_t num_nodes;
 size_t num_edges;
-vector<vector<size_t>> adj_list;
+vector<vector<pair<size_t, size_t>>> adj_list;
 
 vector<size_t> split(const string &str);
 
@@ -20,13 +21,13 @@ int main() {
     num_edges = split_inp[1];
 
     // Initialize adjacency list:
-    adj_list = vector<vector<size_t>>(num_nodes);
+    adj_list = vector<vector<pair<size_t, size_t>>>();
 
     // Form Adj List from verts:
     for (size_t i = 0; i < num_edges; ++i) {
         getline(cin, raw_inp);
         split_inp = split(raw_inp);
-        adj_list[split_inp[0] - 1].push_back(split_inp[1] - 1);
+        adj_list[split_inp[0] - 1].emplace_back(split_inp[1] - 1, split_inp[2] - 1);
     }
 }
 
